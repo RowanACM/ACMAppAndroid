@@ -19,7 +19,7 @@ public class AnnouncementActivity extends AppCompatActivity {
 
             TextView announcementTextView = (TextView) findViewById(R.id.announcement_text_view);
             TextView committeeTextView = (TextView) findViewById(R.id.committee_text_view);
-            announcementTextView.setText(announcement.getMessage());
+            announcementTextView.setText(announcement.getText());
             committeeTextView.setText(announcement.getCommittee());
         }
     }
