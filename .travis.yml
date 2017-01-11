@@ -1,4 +1,6 @@
 language: android
+jdk:
+    - oraclejdk8
 android:
   components:
     # Uncomment the lines below if you want to
@@ -15,3 +17,6 @@ android:
     # Additional components
     - addon
     - extra
+    
+script:
+    - ./gradlew build
