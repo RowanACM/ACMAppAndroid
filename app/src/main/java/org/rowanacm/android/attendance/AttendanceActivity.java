@@ -3,11 +3,9 @@ package org.rowanacm.android.attendance;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
-import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +15,6 @@ import android.text.TextWatcher;
 import android.us.acm.R;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -35,9 +32,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import org.rowanacm.android.Utils;
 import org.rowanacm.android.nfc.NfcManager;
 
 import java.io.IOException;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Sign a member in to the meeting
@@ -62,6 +63,7 @@ public class AttendanceActivity extends AppCompatActivity implements GoogleApiCl
         setContentView(R.layout.activity_attendance);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ButterKnife.bind(this);
 
         // Create the NFC Manager
         createNfcManager();
@@ -76,21 +78,8 @@ public class AttendanceActivity extends AppCompatActivity implements GoogleApiCl
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        Button attendanceButton = (Button) findViewById(R.id.attendance_button);
-        attendanceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                User user = getUser();
-
-                String attendanceUrl = generateAttendanceUrl(user);
-
-                openUrl(attendanceUrl);
-            }
-        });
-
         EditText nameEditText = (EditText) findViewById(R.id.name_exit_text);
-        nameEditText.setText(readFromSharedPreferenceString("name"));
+        nameEditText.setText(Utils.readFromSharedPreferenceString(this, "name"));
         nameEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -109,7 +98,7 @@ public class AttendanceActivity extends AppCompatActivity implements GoogleApiCl
 
 
         EditText emailEditText = (EditText) findViewById(R.id.email_edit_text);
-        emailEditText.setText(readFromSharedPreferenceString("email"));
+        emailEditText.setText(Utils.readFromSharedPreferenceString(this, "email"));
         emailEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -144,14 +133,6 @@ public class AttendanceActivity extends AppCompatActivity implements GoogleApiCl
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signIn();
-            }
-        });
-
-
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -170,8 +151,15 @@ public class AttendanceActivity extends AppCompatActivity implements GoogleApiCl
 
     }
 
-    private void signIn() {
-        Log.d(TAG, "signIn() called");
+    @OnClick(R.id.attendance_button)
+    public void signInAttendance() {
+        User user = getUser();
+        String attendanceUrl = generateAttendanceUrl(user);
+        Utils.openUrl(AttendanceActivity.this, attendanceUrl);
+    }
+
+    @OnClick(R.id.sign_in_google_button)
+    public void signInGoogle() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -179,7 +167,6 @@ public class AttendanceActivity extends AppCompatActivity implements GoogleApiCl
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "onActivityResult() called with: requestCode = [" + requestCode + "], resultCode = [" + resultCode + "], data = [" + data + "]");
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
@@ -200,7 +187,6 @@ public class AttendanceActivity extends AppCompatActivity implements GoogleApiCl
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         Toast.makeText(this, acct.getEmail(), Toast.LENGTH_SHORT).show();
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -223,7 +209,6 @@ public class AttendanceActivity extends AppCompatActivity implements GoogleApiCl
                 });
     }
 
-
     private User getUser() {
         String name = ((EditText) findViewById(R.id.name_exit_text)).getText().toString();
         String email = ((EditText) findViewById(R.id.email_edit_text)).getText().toString();
@@ -232,8 +217,6 @@ public class AttendanceActivity extends AppCompatActivity implements GoogleApiCl
 
         return user;
     }
-
-
 
     @Override
     public void onNewIntent(Intent intent) {
@@ -247,14 +230,6 @@ public class AttendanceActivity extends AppCompatActivity implements GoogleApiCl
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         nfcManager.onActivityResume();
@@ -264,6 +239,14 @@ public class AttendanceActivity extends AppCompatActivity implements GoogleApiCl
     protected void onPause() {
         nfcManager.onActivityPause();
         super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
     /**
@@ -348,13 +331,6 @@ public class AttendanceActivity extends AppCompatActivity implements GoogleApiCl
         */
     }
 
-    private String readFromSharedPreferenceString(String key) {
-        SharedPreferences prefs = AttendanceActivity.this.getSharedPreferences(
-                "org.rowanacm.android", Context.MODE_PRIVATE);
-
-        return prefs.getString(key, ""); // the default value is an empty string
-    }
-
     private String generateAttendanceUrl(User user) {
         if(!user.isValid())
             return defaultAttendanceFormUrl;
@@ -362,16 +338,6 @@ public class AttendanceActivity extends AppCompatActivity implements GoogleApiCl
         String formattedName = user.getName().replace(" ", "+");
 
         return "https://docs.google.com/forms/d/e/1FAIpQLScgL5EttHTj4HblJrkIoSRo560gseCQFoypADL7qEd5UdJlnA/viewform?entry.319595206=" + formattedName + "&entry.1988864937=" + user.getRowanEmailAddress() + "&entry.1997712893&entry.717459855&entry.405789413&entry.856944836";
-    }
-
-    /**
-     * Open a url in a Chrome Custom Tab
-     * @param url the url to open
-     */
-    private void openUrl(String url) {
-        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-        CustomTabsIntent customTabsIntent = builder.build();
-        customTabsIntent.launchUrl(this, Uri.parse(url));
     }
 
     @Override
