@@ -19,4 +19,5 @@ android:
     - extra
     
 script:
+    - touch keystore.properties
     - ./gradlew build
