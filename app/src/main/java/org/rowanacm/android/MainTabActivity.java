@@ -205,7 +205,7 @@ public class MainTabActivity extends AppCompatActivity implements GoogleApiClien
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, int data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
