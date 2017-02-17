@@ -30,3 +30,4 @@ before_install:
     - openssl aes-256-cbc -K $encrypted_48b17afb67f0_key -iv $encrypted_48b17afb67f0_iv -in travis_ci_secrets.tar.enc -out travis_ci_secrets.tar -d
     - tar xvf travis_ci_secrets.tar
     - mv RowanAcmAndroid.jks app
+    - mv acmProdKeystore.jks app
