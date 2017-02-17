@@ -15,8 +15,8 @@ android:
     - android-25
 
     # Additional components
-    - addon
-    - extra
+    # - addon
+    # - extra
     
 script:
     - ./gradlew build
