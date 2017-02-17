@@ -36,10 +36,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
-        if(!System.getenv('CI')) {
-            debug {
-                signingConfig signingConfigs.debug
-            }
+        debug {
+            signingConfig signingConfigs.debug
         }
     }
     lintOptions {
