@@ -6,5 +6,7 @@ android:
 script:
 - ./gradlew build
 before_install:
+- cd travisci
 - openssl aes-256-cbc -K $encrypted_48b17afb67f0_key -iv $encrypted_48b17afb67f0_iv
   -in keystore.properties.enc -out keystore.properties -d
+- mv keystore.properties ..
