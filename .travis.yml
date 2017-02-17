@@ -15,8 +15,8 @@ android:
     - android-25
 
     # Additional components
-    # - addon
-    # - extra
+    - addon
+    - extra
     
 script:
     # Accept the licenses. See http://stackoverflow.com/questions/38096225/automatically-accept-all-sdk-licences
