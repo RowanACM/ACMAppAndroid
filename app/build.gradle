@@ -37,8 +37,9 @@ android {
             signingConfig signingConfigs.release
         }
         debug {
-            if(!System.getenv('CI'))
+            if(!System.getenv('CI')) {
                 signingConfig signingConfigs.debug
+            }
         }
     }
     lintOptions {
