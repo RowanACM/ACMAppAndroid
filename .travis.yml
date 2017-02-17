@@ -1,26 +1,10 @@
 language: android
 jdk:
-    - oraclejdk8
+- oraclejdk8
 android:
-  components:
-    # Uncomment the lines below if you want to
-    # use the latest revision of Android SDK Tools
-    # - platform-tools
-    # - tools
-
-    # The BuildTools version used by your project
-    # - build-tools-25.0.0
-
-    # The SDK version used to compile your project
-    # - android-25
-
-    # Additional components
-    # - addon
-    # - extra
-    
+  components: 
 script:
-    - ./gradlew build
-    
+- ./gradlew build
 before_install:
-    - openssl aes-256-cbc -K $encrypted_48b17afb67f0_key -iv $encrypted_48b17afb67f0_iv -in /home/travis/build/RowanACM/ACMAppAndroid/travisci/keystore.properties.enc -out /home/travis/build/RowanACM/ACMAppAndroid/keystore.properties -d
-    - openssl aes-256-cbc -K $encrypted_48b17afb67f0_key -iv $encrypted_48b17afb67f0_iv -in /home/travis/build/RowanACM/ACMAppAndroid/travisci/RowanAcmAndroid.jks.enc -out /home/travis/build/RowanACM/ACMAppAndroid/RowanAcmAndroid.jks -d
+- openssl aes-256-cbc -K $encrypted_48b17afb67f0_key -iv $encrypted_48b17afb67f0_iv
+  -in keystore.properties.enc -out keystore.properties -d
