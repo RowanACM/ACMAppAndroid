@@ -19,5 +19,7 @@ android:
     - extra
     
 script:
-    - touch /home/travis/build/RowanACM/ACMAppAndroid/keystore.properties
     - ./gradlew build
+    
+before_install:
+    - openssl aes-256-cbc -K $encrypted_48b17afb67f0_key -iv $encrypted_48b17afb67f0_iv -in /travisci/keystore.properties.enc -out keystore.properties -d
