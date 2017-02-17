@@ -22,5 +22,5 @@ script:
     - ./gradlew build
     
 before_install:
-    - openssl aes-256-cbc -K $encrypted_48b17afb67f0_key -iv $encrypted_48b17afb67f0_iv -in /travisci/keystore.properties.enc -out keystore.properties -d
-    - openssl aes-256-cbc -K $encrypted_48b17afb67f0_key -iv $encrypted_48b17afb67f0_iv -in /travisci/RowanAcmAndroid.jks.enc -out RowanAcmAndroid.jks -d
+    - openssl aes-256-cbc -K $encrypted_48b17afb67f0_key -iv $encrypted_48b17afb67f0_iv -in /home/travis/build/RowanACM/ACMAppAndroid/travisci/keystore.properties.enc -out /home/travis/build/RowanACM/ACMAppAndroid/keystore.properties -d
+    - openssl aes-256-cbc -K $encrypted_48b17afb67f0_key -iv $encrypted_48b17afb67f0_iv -in /home/travis/build/RowanACM/ACMAppAndroid/travisci/RowanAcmAndroid.jks.enc -out /home/travis/build/RowanACM/ACMAppAndroid/RowanAcmAndroid.jks -d
