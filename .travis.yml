@@ -19,5 +19,5 @@ android:
     - extra
     
 script:
-    - touch keystore.properties
+    - touch /home/travis/build/RowanACM/ACMAppAndroid/keystore.properties
     - ./gradlew build
