@@ -35,4 +35,3 @@ before_install:
     - openssl aes-256-cbc -K $encrypted_b2f7ee7d0bbd_key -iv $encrypted_b2f7ee7d0bbd_iv -in travis_ci_secrets.tar.enc -out travis_ci_secrets.tar -d
     - tar xvf travis_ci_secrets.tar
     - mv rowan-acm-service-account.json app
- 
