@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/attendance_textview"
                 android:layout_centerHorizontal="true"
+                android:enabled="false"
                 android:text="@string/meeting_sign_in"/>
 
         </RelativeLayout>
@@ -74,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/sign_in_google_button"
-                android:text="What is ACM?\nACM is the programming club at Rowan University. I don't know what else to put here so please open a pull request and add more info here.\n\nWhen do you meet?\nEvery Friday at 2-4 PM in Robinson 224"/>
+                android:text="@string/main_info"/>
 
 
             <TextView
@@ -94,6 +95,13 @@
                 android:visibility="gone"
                 android:text="@string/sign_out"/>
 
+            <Button
+                android:id="@+id/contact_eboard_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact Eboard"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_below="@id/google_sign_out_button"/>
 
         </RelativeLayout>
 
