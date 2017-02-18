@@ -29,6 +29,8 @@ script:
     - echo $TRAVIS_COMMIT_MESSAGE
     - echo "$TRAVIS_COMMIT"
     - echo "$TRAVIS_COMMIT_MESSAGE" | grep -q "DEPLOYALPHA"
+    - test "${TRAVIS_COMMIT_MESSAGE#*DEPLOYALPHA}" != "$TRAVIS_COMMIT_MESSAGE" && echo "DEPLOYALPHA found in $TRAVIS_COMMIT_MESSAGE"
+    
     - if [echo "$TRAVIS_COMMIT_MESSAGE" | grep -q "DEPLOYALPHA"] then echo "DEPLOYALPHA is in $TRAVIS_COMMIT_MESSAGE" else echo "DEPLOYALPHA is not in $TRAVIS_COMMIT_MESSAGE" fi
     
 before_install:
