@@ -5,18 +5,18 @@ android:
   components:
     # Uncomment the lines below if you want to
     # use the latest revision of Android SDK Tools
-    # - platform-tools
-    # - tools
+    - platform-tools
+    - tools
 
     # The BuildTools version used by your project
-    # - build-tools-25.0.0
+    - build-tools-25.0.0
 
     # The SDK version used to compile your project
-    # - android-25
+    - android-25
 
     # Additional components
-    # - addon
-    # - extra
+    - addon
+    - extra
     
 script:
     # Accept the licenses. See http://stackoverflow.com/questions/38096225/automatically-accept-all-sdk-licences
