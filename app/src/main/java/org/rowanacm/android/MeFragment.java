@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -169,8 +170,22 @@ public class MeFragment extends Fragment {
             String committee=stringArray[ndx];//set string based on index of
             Log.d(TAG, "onRadioButtonClicked: "+committee);
             //then send to firebase
+             DatabaseReference mDatabase;
 
-            //send firebase
+// ...
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+            try {
+                String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                if ((null) != userid)
+                    mDatabase.child("members").child(userid).child("committee").setValue(committee);
+            }
+            catch(Exception e){
+
+            }
+
+
+
 
 
         }
