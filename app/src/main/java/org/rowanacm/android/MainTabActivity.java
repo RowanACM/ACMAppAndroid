@@ -1,7 +1,11 @@
 package org.rowanacm.android;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -40,6 +44,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import org.rowanacm.android.annoucement.AlarmReceiver;
 import org.rowanacm.android.annoucement.AnnouncementListFragment;
 
 import butterknife.ButterKnife;
@@ -70,11 +75,16 @@ public class MainTabActivity extends AppCompatActivity implements GoogleApiClien
     // Whether the current user is an admin and is able to create announcements
     private boolean admin;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_tab);
         ButterKnife.bind(this);
+
+
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -150,6 +160,17 @@ public class MainTabActivity extends AppCompatActivity implements GoogleApiClien
                 showCreateAnnouncementDialog();
             }
         });
+
+         AlarmManager alarmMgr;
+         PendingIntent alarmIntent;
+
+        Log.d(TAG, "onStart: " + FirebaseInstanceId.getInstance().getToken());
+        alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+        alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
+        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime()+5000,60000,alarmIntent);
+
+
     }
 
 
@@ -178,6 +199,7 @@ public class MainTabActivity extends AppCompatActivity implements GoogleApiClien
                 startActivity(new Intent(this, AboutActivity.class));
                 return true;
             default:
+
                 return super.onOptionsItemSelected(item);
         }
     }
@@ -187,7 +209,7 @@ public class MainTabActivity extends AppCompatActivity implements GoogleApiClien
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
 
-        Log.d(TAG, "onStart: " + FirebaseInstanceId.getInstance().getToken());
+
     }
 
     @Override

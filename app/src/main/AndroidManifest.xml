@@ -5,6 +5,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="18" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature
         android:name="android.hardware.nfc"
@@ -61,6 +65,26 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.rowanacm.android.MainTabActivity" />
         </activity>
+
+        <receiver android:name="org.rowanacm.android.annoucement.AlarmReceiver"
+                  android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+
+        </receiver>
     </application>
 
+
+
+
+
+
+
+
+
 </manifest>
+
+
+
+
