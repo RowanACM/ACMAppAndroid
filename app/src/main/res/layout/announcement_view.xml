@@ -42,8 +42,7 @@
             tools:text="No meeting this week"
             android:textAlignment="center"
             android:textColor="@color/primary_text"
-            android:textSize="24sp"
-            android:textStyle="normal|bold"/>
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/announcement_desc_view"

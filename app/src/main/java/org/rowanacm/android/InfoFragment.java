@@ -397,4 +397,11 @@ public class InfoFragment extends BaseFragment {
     public void openTwitter() {
         ExternalAppUtils.openUrl(getActivity(), "https://www.twitter.com/rowanacm");
     }
+
+    @OnClick(R.id.open_website_button)
+    public void openAcmWebsite() {
+        ExternalAppUtils.openUrl(getActivity(), "https://rowanacm.org");
+    }
+
+
 }

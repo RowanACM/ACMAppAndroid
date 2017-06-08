@@ -119,15 +119,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/contact_eboard"
-                android:layout_marginBottom="15dp"
                 android:layout_below="@id/have_questions_textview"/>
+
+            <Button
+                android:id="@+id/open_website_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/open_website"
+                android:layout_toRightOf="@id/contact_eboard_button"
+                android:layout_alignTop="@id/contact_eboard_button"/>
 
             <TextView
                 android:id="@+id/social_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/contact_eboard_button"
-                android:text="Please like us on Facebook and follow us on Twitter! It helps us promote the club and attract more members."/>
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/open_website_button"
+                android:text="@string/social_text"/>
 
             <Button
                 android:id="@+id/facebook_button"
@@ -154,7 +162,8 @@
 
             <CheckBox
                 android:id="@+id/uninstall_check"
-                android:layout_below="@id/app_installed_textview"
+                android:layout_alignTop="@id/app_installed_textview"
+                android:layout_toRightOf="@id/app_installed_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"

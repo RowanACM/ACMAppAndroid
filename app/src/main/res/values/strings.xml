@@ -163,4 +163,7 @@
     </string-array>
 
     <string-array name="empty_array"/>
+    <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"https://rowanacm.org\",\n  }\n}]</string>
+    <string name="open_website">Open website</string>
+    <string name="social_text">Please like us on Facebook and follow us on Twitter! It helps us promote the club and attract more members.</string>
 </resources>

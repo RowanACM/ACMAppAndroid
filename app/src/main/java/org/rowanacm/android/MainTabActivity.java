@@ -72,7 +72,7 @@ public class MainTabActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ((AcmApplication)getApplication()).getAcmComponent().inject(this);
+        ((AcmApplication) getApplication()).getAcmComponent().inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_tab);
         ButterKnife.bind(this);
@@ -94,6 +94,14 @@ public class MainTabActivity extends AppCompatActivity {
 
             }
         };
+        // ATTENTION: This was auto-generated to handle app links.
+        //Intent appLinkIntent = getIntent();
+        //String appLinkAction = appLinkIntent.getAction();
+        //Uri appLinkData = appLinkIntent.getData();
+
+        //Log.d(LOG_TAG, appLinkAction);
+        //Log.d(LOG_TAG, appLinkData.toString());
+
     }
 
     private void setupTabLayout() {
