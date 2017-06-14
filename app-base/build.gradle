@@ -1,6 +1,8 @@
-apply plugin: 'com.android.application'
-apply plugin: 'com.github.triplet.play'
-apply plugin: 'com.google.firebase.firebase-perf'
+//apply plugin: 'com.android.application'
+//apply plugin: 'com.github.triplet.play'
+//apply plugin: 'com.google.firebase.firebase-perf'
+
+apply plugin: 'com.android.feature'
 
 
 def keystorePropertiesFile = rootProject.file("keystore.properties")
@@ -24,8 +26,9 @@ android {
     }
     compileSdkVersion 25
     buildToolsVersion '25.0.2'
+    baseFeature = true
     defaultConfig {
-        applicationId "org.rowanacm.android"
+        //applicationId "org.rowanacm.android"
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 20

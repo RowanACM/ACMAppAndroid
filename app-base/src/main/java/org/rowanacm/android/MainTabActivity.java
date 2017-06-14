@@ -15,26 +15,15 @@ import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import org.rowanacm.android.announcement.CreateAnnouncementDialog;
 import org.rowanacm.android.utils.AcmUtils;
-
-import javax.inject.Inject;
 
 //import butterknife.BindView;
 //import butterknife.ButterKnife;
@@ -53,10 +42,10 @@ public class MainTabActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_GOOGLE_SIGN_IN = 4;
 
-    @Inject DatabaseReference database;
-    @Inject FirebaseAuth firebaseAuth;
-    @Inject GoogleSignInOptions gso;
-    @Inject GoogleApiClient googleApiClient;
+    //@inject DatabaseReference database;
+    //@inject FirebaseAuth firebaseAuth;
+    //@inject GoogleSignInOptions gso;
+    //@inject GoogleApiClient googleApiClient;
 
     private TabLayout tabLayout;
     private FloatingActionButton fab;
@@ -155,25 +144,26 @@ public class MainTabActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.settings:
-                switchActivity(SettingsActivity.class);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        int i = item.getItemId();
+        if (i == R.id.settings) {
+            switchActivity(SettingsActivity.class);
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        firebaseAuth.addAuthStateListener(mAuthListener);
-        googleApiClient.connect();
+        //firebaseAuth.addAuthStateListener(mAuthListener);
+        //googleApiClient.connect();
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        /*
         if (mAuthListener != null) {
             firebaseAuth.removeAuthStateListener(mAuthListener);
         }
@@ -181,12 +171,13 @@ public class MainTabActivity extends AppCompatActivity {
         if (adminListener != null && firebaseAuth.getCurrentUser() != null) {
             database.child("members").child(firebaseAuth.getCurrentUser().getUid()).child("admin").removeEventListener(adminListener);
         }
+        */
     }
 
     public void signInGoogle() {
         Toast.makeText(this, R.string.google_sign_in_prompt, Toast.LENGTH_LONG).show();
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-        startActivityForResult(signInIntent, REQUEST_CODE_GOOGLE_SIGN_IN);
+        //Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+        //startActivityForResult(signInIntent, REQUEST_CODE_GOOGLE_SIGN_IN);
     }
 
     @Override
@@ -214,6 +205,7 @@ public class MainTabActivity extends AppCompatActivity {
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Toast.makeText(this, acct.getEmail(), Toast.LENGTH_SHORT).show();
 
+        /*
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         firebaseAuth.signInWithCredential(credential)
                 .addOnFailureListener(this, new OnFailureListener() {
@@ -236,6 +228,7 @@ public class MainTabActivity extends AppCompatActivity {
                         }
                     }
                 });
+                */
     }
 
     /**
@@ -248,7 +241,7 @@ public class MainTabActivity extends AppCompatActivity {
 
     private void adminListener(final String userid) {
         if (adminListener != null) {
-            database.child("members").child(userid).child("admin").removeEventListener(adminListener);
+            //database.child("members").child(userid).child("admin").removeEventListener(adminListener);
         }
 
         adminListener = new ValueEventListener() {
@@ -264,7 +257,7 @@ public class MainTabActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         };
-        database.child("members").child(userid).child("admin").addValueEventListener(adminListener);
+        //database.child("members").child(userid).child("admin").addValueEventListener(adminListener);
     }
 
     /**

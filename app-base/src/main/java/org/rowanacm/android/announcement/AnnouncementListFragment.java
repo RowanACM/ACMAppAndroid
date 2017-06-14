@@ -13,20 +13,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
 import com.squareup.picasso.Picasso;
 
 import org.rowanacm.android.AcmApplication;
 import org.rowanacm.android.BaseFragment;
 import org.rowanacm.android.R;
-import org.rowanacm.android.firebase.ChildListener;
 
 import java.util.ArrayList;
-
-import javax.inject.Inject;
 
 //import butterknife.BindView;
 
@@ -36,7 +30,7 @@ public class AnnouncementListFragment extends BaseFragment {
 
     SearchView searchView;
 
-    @Inject DatabaseReference database;
+    //@inject DatabaseReference database;
 
     private RecyclerView recyclerView;
 
@@ -101,6 +95,7 @@ public class AnnouncementListFragment extends BaseFragment {
     }
 
     public ChildEventListener announcementsListener() {
+        /*
         try {
             return database.child("announcements")
                     .addChildEventListener(new ChildListener() {
@@ -114,6 +109,8 @@ public class AnnouncementListFragment extends BaseFragment {
             FirebaseCrash.report(e);
             return null;
         }
+        */
+        return null;
     }
     public void addAnnouncement(Announcement announcement) {
         adapter.addItem(announcement);

@@ -56,15 +56,15 @@ public class MeFragment extends BaseFragment {
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseAuth.getInstance().addAuthStateListener(mAuthListener);
+        //FirebaseAuth.getInstance().addAuthStateListener(mAuthListener);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (mAuthListener != null) {
-            FirebaseAuth.getInstance().removeAuthStateListener(mAuthListener);
-        }
+        //if (mAuthListener != null) {
+        //    FirebaseAuth.getInstance().removeAuthStateListener(mAuthListener);
+        //}
     }
 
     @Override

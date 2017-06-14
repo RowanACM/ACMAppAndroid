@@ -1,26 +1,6 @@
 package org.rowanacm.android;
 
-import android.content.Context;
-
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
-
-import org.rowanacm.android.firebase.RemoteConfig;
-
-import javax.inject.Singleton;
-
 import dagger.Module;
-import dagger.Provides;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class AcmModule {
@@ -28,6 +8,8 @@ public class AcmModule {
     public AcmModule() {
 
     }
+
+    /*
 
     @Provides
     @Singleton
@@ -53,7 +35,7 @@ public class AcmModule {
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         return new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(context.getString(R.string.default_web_client_id))
+                //.requestIdToken(context.getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
     }
@@ -72,10 +54,11 @@ public class AcmModule {
         return FirebaseAuth.getInstance();
     }
 
+
     @Provides
     @Singleton
     DatabaseReference providesFirebaseDatabaseReference() {
-        return FirebaseDatabase.getInstance().getReference();
+        return null; //FirebaseDatabase.getInstance().getReference();
     }
 
     @Provides
@@ -108,4 +91,6 @@ public class AcmModule {
 
         return retrofit.create(AttendanceClient.class);
     }
+
+    */
 }

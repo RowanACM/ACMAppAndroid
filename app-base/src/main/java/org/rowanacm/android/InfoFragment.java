@@ -16,25 +16,14 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.CheckBox;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import org.rowanacm.android.firebase.RemoteConfig;
 import org.rowanacm.android.utils.ExternalAppUtils;
 
 import java.util.Calendar;
 import java.util.TimeZone;
-
-import javax.inject.Inject;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class InfoFragment extends BaseFragment {
@@ -47,11 +36,11 @@ public class InfoFragment extends BaseFragment {
     private final int RESPONSE_INVALID = 210;
     private final int RESPONSE_UNKNOWN = 220;
 
-    @Inject RemoteConfig remoteConfig;
-    @Inject FirebaseAuth firebaseAuth;
-    @Inject DatabaseReference database;
-    @Inject GoogleApiClient googleApiClient;
-    @Inject AttendanceClient attendanceClient;
+    //@inject RemoteConfig remoteConfig;
+    //@inject FirebaseAuth firebaseAuth;
+    //@inject DatabaseReference database;
+    //@inject GoogleApiClient googleApiClient;
+    //@inject AttendanceClient attendanceClient;
 
     /*
     @BindView(R.id.attendance_layout) ViewGroup attendanceLayout;
@@ -100,7 +89,7 @@ public class InfoFragment extends BaseFragment {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
                 // Refresh the attendance status
-                database.removeEventListener(attendanceListener);
+                //database.removeEventListener(attendanceListener);
                 attendanceListener = attendanceListener();
 
                 updateGoogleSignInButtons(user != null);
@@ -116,24 +105,24 @@ public class InfoFragment extends BaseFragment {
     }
 
     private void loadHeaderImage(View view) {
-        String headerUrl = remoteConfig.getString(R.string.rc_header_image);
-        if (headerUrl != null && headerUrl.length() > 5 && view != null) {
+        //String headerUrl = remoteConfig.getString(R.string.rc_header_image);
+        //if (headerUrl != null && headerUrl.length() > 5 && view != null) {
             //Picasso.with(getActivity()).load(headerUrl).into(headerImageView);
-        }
+        //}
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        firebaseAuth.addAuthStateListener(authListener);
+        //firebaseAuth.addAuthStateListener(authListener);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (firebaseAuth != null) {
-            firebaseAuth.removeAuthStateListener(authListener);
-        }
+        //if (firebaseAuth != null) {
+        //    firebaseAuth.removeAuthStateListener(authListener);
+        //}
     }
 
     //@OnClick(R.id.sign_in_google_button)
@@ -143,6 +132,7 @@ public class InfoFragment extends BaseFragment {
 
     //@OnClick(R.id.attendance_button)
     protected void signInToMeeting() {
+        /*
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         if(currentUser != null) {
             progressDialog = new ProgressDialog(getActivity());
@@ -175,6 +165,7 @@ public class InfoFragment extends BaseFragment {
             });
 
         }
+        */
     }
 
     private void showAttendanceResult(String message, boolean useSnackbar) {
@@ -188,6 +179,7 @@ public class InfoFragment extends BaseFragment {
     }
 
     private ValueEventListener attendanceListener() {
+        /*
         return database.child("attendance").child("status").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -215,9 +207,12 @@ public class InfoFragment extends BaseFragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
+        */
+        return null;
     }
 
     private void createSignedInListener(String currentMeeting, String uid) {
+        /*
         database.child("attendance").child(currentMeeting).child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -228,6 +223,7 @@ public class InfoFragment extends BaseFragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
+        */
     }
 
     /**

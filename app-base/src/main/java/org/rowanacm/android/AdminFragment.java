@@ -7,12 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import javax.inject.Inject;
-
 
 public class AdminFragment extends BaseFragment {
 
-    @Inject AdminManager adminManager;
+    //@inject AdminManager adminManager;
 
     private Button enableAttendanceButton;
     private Button disableAttendanceButton;
@@ -67,12 +65,12 @@ public class AdminFragment extends BaseFragment {
 
     //@OnClick(R.id.enable_attendance_button)
     public void enableAttendance() {
-        adminManager.setAttendanceEnabled(true);
+        //adminManager.setAttendanceEnabled(true);
     }
 
     //@OnClick(R.id.disable_attendance_button)
     public void disableAttendance() {
-        adminManager.setAttendanceEnabled(false);
+        //adminManager.setAttendanceEnabled(false);
     }
 
 

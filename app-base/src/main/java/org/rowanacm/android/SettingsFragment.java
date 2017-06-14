@@ -3,27 +3,18 @@ package org.rowanacm.android;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
-import com.google.firebase.auth.FirebaseAuth;
-
 import org.rowanacm.android.utils.ExternalAppUtils;
-
-import javax.inject.Inject;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class SettingsFragment extends PreferenceFragment {
 
-    @Inject FirebaseAuth firebaseAuth;
-    @Inject GoogleApiClient googleApiClient;
+    //@inject FirebaseAuth firebaseAuth;
+    //@inject GoogleApiClient googleApiClient;
 
     public SettingsFragment() {
     }
@@ -48,11 +39,13 @@ public class SettingsFragment extends PreferenceFragment {
 
         final Preference google_sign_out = findPreference("google_sign_out");
 
+        /*
         if (firebaseAuth.getCurrentUser() == null) {
             google_sign_out.setTitle("Sign in");
         } else {
             google_sign_out.setTitle("Sign out");
         }
+        */
 
 
         google_sign_out.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -69,16 +62,17 @@ public class SettingsFragment extends PreferenceFragment {
     @Override
     public void onStart() {
         super.onStart();
-        googleApiClient.connect();
+        //googleApiClient.connect();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        googleApiClient.disconnect();
+        //googleApiClient.disconnect();
     }
 
     private void signOut() {
+        /*
         Auth.GoogleSignInApi.revokeAccess(googleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
                     @Override
@@ -87,5 +81,6 @@ public class SettingsFragment extends PreferenceFragment {
                         Toast.makeText(getActivity(), R.string.signed_out, Toast.LENGTH_SHORT).show();
                     }
                 });
+                */
     }
 }
