@@ -9,20 +9,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.rowanacm.android.utils.ExternalAppUtils;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 
 public class MeFragment extends BaseFragment {
@@ -31,12 +22,12 @@ public class MeFragment extends BaseFragment {
 
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    @BindView(R.id.name_text_view) TextView nameTextView;
-    @BindView(R.id.on_slack_textview) TextView onSlackTextView;
-    @BindView(R.id.meeting_count_textview) TextView meetingCountTextView;
-    @BindView(R.id.committee_text_view) TextView committeeTextView;
-    @BindView(R.id.email_textview) TextView emailTextView;
-    @BindView(R.id.profile_pic_image_view) ImageView profilePicImageView;
+    //@BindView(R.id.name_text_view) TextView nameTextView;
+    //@BindView(R.id.on_slack_textview) TextView onSlackTextView;
+    //@BindView(R.id.meeting_count_textview) TextView meetingCountTextView;
+    //@BindView(R.id.committee_text_view) TextView committeeTextView;
+    //@BindView(R.id.email_textview) TextView emailTextView;
+    //@BindView(R.id.profile_pic_image_view) ImageView profilePicImageView;
 
     public MeFragment() {
 
@@ -87,6 +78,8 @@ public class MeFragment extends BaseFragment {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
+                /*
+
                 if (user != null) {
                     // User is signed in
                     nameTextView.setText(user.getDisplayName());
@@ -121,11 +114,13 @@ public class MeFragment extends BaseFragment {
                     // User is signed out
                     Log.d(LOG_TAG, "onAuthStateChanged:signed_out");
                 }
+
+                */
             }
         };
     }
 
-    @OnClick(R.id.change_committee_button)
+   //@OnClick(R.id.change_committee_button)
     protected void chooseCommittee() {
         // custom dialog
         final Dialog dialog = new ChooseCommitteeDialog(getActivity()) {
@@ -149,7 +144,7 @@ public class MeFragment extends BaseFragment {
     /**
      * Open the slack app
      */
-    @OnClick(R.id.slack_button)
+   //@OnClick(R.id.slack_button)
     protected void openSlack() {
         if (ExternalAppUtils.isAppInstalled(getActivity(), "com.Slack")) {
             Uri uri = Uri.parse("slack://open");

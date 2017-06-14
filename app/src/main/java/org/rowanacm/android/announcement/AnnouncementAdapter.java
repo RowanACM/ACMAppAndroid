@@ -15,7 +15,7 @@ import org.rowanacm.android.SearchableAdapter;
 
 import java.util.List;
 
-import static butterknife.ButterKnife.findById;
+//import static butterknife.ButterKnife.findById;
 
 public class AnnouncementAdapter extends SearchableAdapter<AnnouncementAdapter.AnnouncementViewHolder, Announcement> {
 
@@ -30,9 +30,10 @@ public class AnnouncementAdapter extends SearchableAdapter<AnnouncementAdapter.A
         public AnnouncementViewHolder(View view) {
             super(view);
 
-            cardView = findById(view, R.id.card_view);
-            titleTextView = findById(view, R.id.announcement_title_view);
-            bodyTextView = findById(view, R.id.announcement_desc_view);
+            cardView = (CardView) view.findViewById(R.id.card_view);
+            titleTextView = (TextView) view.findViewById(R.id.announcement_title_view);
+            bodyTextView = (TextView) view.findViewById(R.id.announcement_desc_view);
+
         }
 
     }

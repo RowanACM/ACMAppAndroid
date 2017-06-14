@@ -14,15 +14,8 @@ import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,7 +23,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import org.rowanacm.android.firebase.RemoteConfig;
 import org.rowanacm.android.utils.ExternalAppUtils;
@@ -40,8 +32,6 @@ import java.util.TimeZone;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -63,11 +53,13 @@ public class InfoFragment extends BaseFragment {
     @Inject GoogleApiClient googleApiClient;
     @Inject AttendanceClient attendanceClient;
 
+    /*
     @BindView(R.id.attendance_layout) ViewGroup attendanceLayout;
     @BindView(R.id.attendance_textview) TextView attendanceTextView;
     @BindView(R.id.attendance_button) Button meetingButton;
     @BindView(R.id.sign_in_google_button) SignInButton googleSignInButton;
     @BindView(R.id.header_image_view) ImageView headerImageView;
+    */
 
     private ProgressDialog progressDialog;
 
@@ -126,7 +118,7 @@ public class InfoFragment extends BaseFragment {
     private void loadHeaderImage(View view) {
         String headerUrl = remoteConfig.getString(R.string.rc_header_image);
         if (headerUrl != null && headerUrl.length() > 5 && view != null) {
-            Picasso.with(getActivity()).load(headerUrl).into(headerImageView);
+            //Picasso.with(getActivity()).load(headerUrl).into(headerImageView);
         }
     }
 
@@ -144,12 +136,12 @@ public class InfoFragment extends BaseFragment {
         }
     }
 
-    @OnClick(R.id.sign_in_google_button)
+    //@OnClick(R.id.sign_in_google_button)
     public void signInGoogle() {
         ((MainTabActivity)getActivity()).signInGoogle();
     }
 
-    @OnClick(R.id.attendance_button)
+    //@OnClick(R.id.attendance_button)
     protected void signInToMeeting() {
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         if(currentUser != null) {
@@ -241,7 +233,7 @@ public class InfoFragment extends BaseFragment {
     /**
      * Create an email intent to contact acm@rowan.edu
      */
-    @OnClick(R.id.contact_eboard_button)
+    //@OnClick(R.id.contact_eboard_button)
     protected void contact_eboard() {
         ExternalAppUtils.sendEmail(getActivity(),
                 getString(R.string.acm_email_address),
@@ -250,6 +242,7 @@ public class InfoFragment extends BaseFragment {
     }
 
     private void updateAttendanceViews(AttendanceMode attendanceMode) {
+        /*
         View rootView = getView();
         if (rootView == null)
             return;
@@ -283,6 +276,7 @@ public class InfoFragment extends BaseFragment {
                 meetingButton.startAnimation(pulse);
                 break;
         }
+        */
     }
 
     /**
@@ -290,6 +284,7 @@ public class InfoFragment extends BaseFragment {
      * @param currentlySignedIn Whether the user is currently signed in
      */
     private void updateGoogleSignInButtons(boolean currentlySignedIn) {
+        /*
         if(currentlySignedIn) {
             googleSignInButton.setVisibility(View.GONE);
             //signOutTextView.setVisibility(View.VISIBLE);
@@ -300,9 +295,10 @@ public class InfoFragment extends BaseFragment {
             //signOutTextView.setVisibility(View.GONE);
             //signOutButton.setVisibility(View.GONE);
         }
+        */
     }
 
-    @OnClick(R.id.calendar_button)
+   //@OnClick(R.id.calendar_button)
     protected void addToCalendar() {
         final int MEETING_LENGTH_MINUTES = 90;
 
@@ -379,7 +375,7 @@ public class InfoFragment extends BaseFragment {
         return "INFO";
     }
 
-    @OnClick(R.id.uninstall_check)
+   //@OnClick(R.id.uninstall_check)
     public void uninstall(CheckBox checkBox) {
         if(!checkBox.isChecked()) {
             Intent intent = new Intent(Intent.ACTION_DELETE);
@@ -388,17 +384,17 @@ public class InfoFragment extends BaseFragment {
         }
     }
 
-    @OnClick(R.id.facebook_button)
+   //@OnClick(R.id.facebook_button)
     public void openFacebook() {
         ExternalAppUtils.openUrl(getActivity(), "https://www.facebook.com/rowanacm");
     }
 
-    @OnClick(R.id.twitter_button)
+   //@OnClick(R.id.twitter_button)
     public void openTwitter() {
         ExternalAppUtils.openUrl(getActivity(), "https://www.twitter.com/rowanacm");
     }
 
-    @OnClick(R.id.open_website_button)
+   //@OnClick(R.id.open_website_button)
     public void openAcmWebsite() {
         ExternalAppUtils.openUrl(getActivity(), "https://rowanacm.org");
     }

@@ -3,21 +3,14 @@ package org.rowanacm.android.announcement;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import org.rowanacm.android.R;
 import org.rowanacm.android.utils.ExternalAppUtils;
 
 import java.util.Date;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+//import butterknife.BindView;
+//import butterknife.ButterKnife;
 
 public class AnnouncementActivity extends AppCompatActivity {
     private static final String LOG_TAG = Announcement.class.getSimpleName();
@@ -27,18 +20,20 @@ public class AnnouncementActivity extends AppCompatActivity {
 
     private Announcement announcement;
 
-    @BindView(R.id.announcement_imageview) ImageView announcementImageView;
-    @BindView(R.id.title_text_view) TextView titleTextView;
-    @BindView(R.id.announcement_text_view) TextView announcementTextView;
-    @BindView(R.id.committee_text_view) TextView committeeTextView;
-    @BindView(R.id.date_text_view) TextView dateTextView;
-    @BindView(R.id.announcement_url_button) Button urlButton;
+    //@BindView(R.id.announcement_imageview) ImageView announcementImageView;
+    //@BindView(R.id.title_text_view) TextView titleTextView;
+    //@BindView(R.id.announcement_text_view) TextView announcementTextView;
+    //@BindView(R.id.committee_text_view) TextView committeeTextView;
+    //@BindView(R.id.date_text_view) TextView dateTextView;
+    //@BindView(R.id.announcement_url_button) Button urlButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_announcement);
-        ButterKnife.bind(this);
+        //ButterKnife.bind(this);
+
+        /*
 
         if (savedInstanceState != null) {
             announcement = (Announcement) savedInstanceState.getSerializable(ANNOUNCEMENT_INSTANT_STATE_KEY);
@@ -63,6 +58,8 @@ public class AnnouncementActivity extends AppCompatActivity {
         } else {
             announcementImageView.setVisibility(View.GONE);
         }
+
+        */
     }
 
     @Override
@@ -72,10 +69,12 @@ public class AnnouncementActivity extends AppCompatActivity {
     }
 
     private void loadHeaderImage() {
+        /*
         Picasso.with(this)
                 .load(announcement.getImageUrl())
                 .fit()
                 .into(announcementImageView);
+                */
     }
 
     private String getRelativeDate(Announcement announcement) {
@@ -84,7 +83,7 @@ public class AnnouncementActivity extends AppCompatActivity {
         return DateUtils.getRelativeTimeSpanString(timestamp, now, DateUtils.SECOND_IN_MILLIS).toString();
     }
 
-    @OnClick(R.id.announcement_url_button)
+   //@OnClick(R.id.announcement_url_button)
     public void openAnnouncementUrl() {
         ExternalAppUtils.openUrl(this, announcement.getUrl());
     }

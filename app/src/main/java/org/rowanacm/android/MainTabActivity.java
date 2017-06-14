@@ -36,9 +36,8 @@ import org.rowanacm.android.utils.AcmUtils;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+//import butterknife.BindView;
+//import butterknife.ButterKnife;
 
 /**
  * The main activity of the app. Contains a view pager with
@@ -59,10 +58,15 @@ public class MainTabActivity extends AppCompatActivity {
     @Inject GoogleSignInOptions gso;
     @Inject GoogleApiClient googleApiClient;
 
-    @BindView(R.id.tab_layout) TabLayout tabLayout;
-    @BindView(R.id.fab) FloatingActionButton fab;
-    @BindView(R.id.container) ViewPager viewPager;
-    @BindView(R.id.toolbar) Toolbar toolbar;
+    private TabLayout tabLayout;
+    private FloatingActionButton fab;
+    private ViewPager viewPager;
+    private Toolbar toolbar;
+
+    //@BindView(R.id.tab_layout) TabLayout tabLayout;
+    //@BindView(R.id.fab) FloatingActionButton fab;
+    //@BindView(R.id.container) ViewPager viewPager;
+    //@BindView(R.id.toolbar) Toolbar toolbar;
 
     SectionsPagerAdapter sectionsPagerAdapter;
 
@@ -75,7 +79,13 @@ public class MainTabActivity extends AppCompatActivity {
         ((AcmApplication) getApplication()).getAcmComponent().inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_tab);
-        ButterKnife.bind(this);
+
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        viewPager = (ViewPager) findViewById(R.id.container);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        //ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
         setupTabLayout();
@@ -89,7 +99,7 @@ public class MainTabActivity extends AppCompatActivity {
                     adminListener(user.getUid());
                 } else {
                     // User is signed out
-                    AcmUtils.setFabVisibility(fab, false);
+                    //AcmUtils.setFabVisibility(fab, false);
                 }
 
             }
@@ -105,6 +115,7 @@ public class MainTabActivity extends AppCompatActivity {
     }
 
     private void setupTabLayout() {
+
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(sectionsPagerAdapter);
         viewPager.addOnPageChangeListener(new EmptyTabChangeListener() {
@@ -115,14 +126,17 @@ public class MainTabActivity extends AppCompatActivity {
             }
         });
         tabLayout.setupWithViewPager(viewPager);
+
     }
 
     public void showAdminFragment() {
+
         if (!showingAdminFragment) {
             showingAdminFragment = true;
             sectionsPagerAdapter.addFragment(AdminFragment.newInstance());
             viewPager.setAdapter(sectionsPagerAdapter);
         }
+
     }
 
     /**
@@ -227,7 +241,7 @@ public class MainTabActivity extends AppCompatActivity {
     /**
      * Show the dialog to create an announcement
      */
-    @OnClick(R.id.fab)
+   //@OnClick(R.id.fab)
     protected void showCreateAnnouncementDialog() {
         new CreateAnnouncementDialog(this).create().show();
     }

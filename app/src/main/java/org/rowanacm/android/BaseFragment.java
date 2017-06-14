@@ -9,13 +9,10 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 
 public abstract class BaseFragment extends Fragment {
 
-    protected Unbinder unbinder;
+    //protected Unbinder unbinder;
 
     public abstract @LayoutRes int getLayout();
 
@@ -24,7 +21,7 @@ public abstract class BaseFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View rootView = inflater.inflate(getLayout(), container, false);
-        unbinder = ButterKnife.bind(this, rootView);
+        //unbinder = ButterKnife.bind(this, rootView);
         return rootView;
     }
 
@@ -43,7 +40,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
+        //unbinder.unbind();
     }
 
     /**

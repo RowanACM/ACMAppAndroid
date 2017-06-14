@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
+//import butterknife.BindView;
 
 public class AnnouncementListFragment extends BaseFragment {
 
@@ -38,7 +38,9 @@ public class AnnouncementListFragment extends BaseFragment {
 
     @Inject DatabaseReference database;
 
-    @BindView(R.id.announcement_recycler_view) RecyclerView recyclerView;
+    private RecyclerView recyclerView;
+
+    //@BindView(R.id.announcement_recycler_view) RecyclerView recyclerView;
 
     public AnnouncementListFragment() {
 
@@ -61,6 +63,7 @@ public class AnnouncementListFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        recyclerView = (RecyclerView) view.findViewById(R.id.announcement_recycler_view);
         setupRecyclerView();
         announcementsListener();
     }
@@ -124,6 +127,7 @@ public class AnnouncementListFragment extends BaseFragment {
     }
 
     private void setupRecyclerView() {
+
         if (recyclerView != null) {
             adapter = new AnnouncementAdapter(new ArrayList<Announcement>(), AnnouncementListFragment.this, 10);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
@@ -131,6 +135,7 @@ public class AnnouncementListFragment extends BaseFragment {
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(adapter);
         }
+
     }
 
 }

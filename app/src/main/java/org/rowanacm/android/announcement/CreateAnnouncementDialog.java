@@ -2,40 +2,28 @@ package org.rowanacm.android.announcement;
 
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import org.rowanacm.android.R;
 
-import java.text.DateFormat;
-import java.util.Date;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
+//import butterknife.ButterKnife;
 
 public class CreateAnnouncementDialog extends AlertDialog.Builder {
 
-    @BindView(R.id.author_edit_text) EditText authorEditText;
-    @BindView(R.id.subject_edit_text) EditText subjectEditText;
-    @BindView(R.id.message_edit_text) EditText messageEditText;
-    @BindView(R.id.committee_spinner) Spinner committeeSpinner;
+    //@BindView(R.id.author_edit_text) EditText authorEditText;
+    //@BindView(R.id.subject_edit_text) EditText subjectEditText;
+    //@BindView(R.id.message_edit_text) EditText messageEditText;
+    //@BindView(R.id.committee_spinner) Spinner committeeSpinner;
 
     public CreateAnnouncementDialog(Activity activity) {
         super(activity);
         setTitle(R.string.create_announcement);
         final View dialogView = activity.getLayoutInflater().inflate(R.layout.create_announcement_view, null);
         setView(dialogView);
-        ButterKnife.bind(this, dialogView);
+        //ButterKnife.bind(this, dialogView);
 
+        /*
         setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             // When Cancel is pressed, close the dialog and do nothing
             @Override
@@ -71,5 +59,6 @@ public class CreateAnnouncementDialog extends AlertDialog.Builder {
                 R.array.committee_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         committeeSpinner.setAdapter(adapter);
+        */
     }
 }

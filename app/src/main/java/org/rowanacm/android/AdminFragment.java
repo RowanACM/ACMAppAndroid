@@ -2,15 +2,20 @@ package org.rowanacm.android;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import javax.inject.Inject;
-
-import butterknife.OnClick;
 
 
 public class AdminFragment extends BaseFragment {
 
     @Inject AdminManager adminManager;
+
+    private Button enableAttendanceButton;
+    private Button disableAttendanceButton;
 
     public AdminFragment() {
 
@@ -28,6 +33,29 @@ public class AdminFragment extends BaseFragment {
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        enableAttendanceButton = (Button) rootView.findViewById(R.id.enable_attendance_button);
+        disableAttendanceButton = (Button) rootView.findViewById(R.id.disable_attendance_button);
+
+        enableAttendanceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enableAttendance();
+            }
+        });
+
+        disableAttendanceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                disableAttendance();
+            }
+        });
+
+        return rootView;
+    }
+
+    @Override
     public @LayoutRes int getLayout() {
         return R.layout.fragment_admin;
     }
@@ -37,12 +65,12 @@ public class AdminFragment extends BaseFragment {
         return "ADMIN";
     }
 
-    @OnClick(R.id.enable_attendance_button)
+    //@OnClick(R.id.enable_attendance_button)
     public void enableAttendance() {
         adminManager.setAttendanceEnabled(true);
     }
 
-    @OnClick(R.id.disable_attendance_button)
+    //@OnClick(R.id.disable_attendance_button)
     public void disableAttendance() {
         adminManager.setAttendanceEnabled(false);
     }
