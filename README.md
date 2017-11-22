@@ -1,5 +1,8 @@
 # ACM App Android [![Build Status](https://travis-ci.org/RowanACM/ACMAppAndroid.svg?branch=master)](https://travis-ci.org/RowanACM/ACMAppAndroid)
 
+# This project has moved. The new repo is [here](https://github.com/RowanACM/ACMApp).
+<br/><br/>
+
 <a href='https://play.google.com/store/apps/details?id=org.rowanacm.android&utm_source=github-readme&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://cloud.githubusercontent.com/assets/6628497/23095596/5cfe189c-f5da-11e6-9530-344555e2ebaa.png'/></a>
 
 
